@@ -1,0 +1,66 @@
+@use '../../../scss/globals/index' as *;
+
+.mainNav {
+  display: block;
+
+  @include maxw($cellphone-portrait) {
+    display: none;
+  }
+}
+
+.mainNav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 1.8vw, 24px);
+}
+
+.mainNav__item {
+  display: flex;
+  align-items: center;
+}
+
+.mainNav__link {
+  position: relative;
+  display: inline-block;
+  padding: 8px 2px;
+  color: rgba(232, 232, 232, 0.85);
+  text-decoration: none;
+  transition: color $transition-fast;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: $silver-light;
+    transition: width $transition-fast, left $transition-fast;
+  }
+
+  &:hover {
+    color: $color-white;
+
+    &::after {
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  &.isActive {
+    color: $color-white;
+
+    &::after {
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  @include maxw($cellphone-portrait) {
+    padding: 6px 2px;
+  }
+}

@@ -1,0 +1,57 @@
+@use '../../../scss/globals/index' as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background $transition-fast,
+              border-color $transition-fast,
+              color $transition-fast;
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $silver-mid;
+    outline-offset: 2px;
+  }
+}
+
+.btn--primary {
+  background: $silver-light;
+  color: $surface-dark-1;
+  border: 1px solid $silver-light;
+
+  &:hover:not(:disabled) {
+    background: $color-white;
+    border-color: $color-white;
+  }
+}
+
+.btn--secondary {
+  background: transparent;
+  color: $silver-light;
+  border: 1px solid $silver-mid;
+
+  &:hover:not(:disabled) {
+    border-color: $silver-light;
+    color: $color-white;
+  }
+}
+
+.btn--ghost {
+  background: transparent;
+  color: $silver-mid;
+  border: none;
+
+  &:hover:not(:disabled) {
+    color: $silver-light;
+  }
+}

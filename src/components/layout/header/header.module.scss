@@ -1,0 +1,142 @@
+@use '../../../scss/globals/index' as *;
+
+.glassWrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: rgba(12, 12, 13, 0.55);
+  backdrop-filter: blur(8px) saturate(115%);
+  -webkit-backdrop-filter: blur(8px) saturate(115%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glassWrapper__inner {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 10px 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  @include maxw($cellphone-portrait) {
+    padding: 10px 1rem;
+  }
+}
+
+.brand {
+  text-decoration: none;
+}
+
+.brand__text {
+  color: $silver-light;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  font-size: 1.25rem;
+  line-height: 1;
+  white-space: nowrap;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-white;
+  }
+
+  @include maxw($cellphone-portrait) {
+    font-size: 1.1rem;
+  }
+}
+
+.mainNav {
+  display: block;
+}
+
+.hamburger {
+  display: none;
+
+  @include maxw($cellphone-portrait) {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 40px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    cursor: pointer;
+
+    span {
+      display: block;
+      height: 2px;
+      width: 22px;
+      margin: 0 auto;
+      background: $silver-light;
+      border-radius: 2px;
+    }
+  }
+}
+
+.mobileNav {
+  display: none;
+
+  @include maxw($cellphone-portrait) {
+    display: grid;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    transform: translateY(-16px);
+    opacity: 0;
+    pointer-events: none;
+    background: rgba(12, 12, 13, 0.96);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    gap: 8px;
+    padding: 12px 16px;
+    transition: transform $transition-fast, opacity $transition-fast;
+
+    &.isOpen {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+}
+
+.mobileNav__link {
+  padding: 10px 6px;
+  color: $silver-light;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.mobileBackdrop {
+  display: none;
+
+  @include maxw($cellphone-portrait) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    top: 56px;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $transition-fast;
+    border: none;
+    cursor: default;
+
+    &.isOpen {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+}
+
+.no-scroll {
+  overflow: hidden;
+}

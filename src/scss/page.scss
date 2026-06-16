@@ -1,0 +1,101 @@
+@use 'sass:color';
+@use './globals/index' as *;
+
+// =============================
+// Variables
+// =============================
+$text: $silver-light;
+
+// =============================
+// Global Reset / Defaults
+// =============================
+html {
+  box-sizing: border-box;
+  scrollbar-gutter: stable both-edges;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  height: 100%;
+  min-height: 100dvh;
+}
+
+body {
+  margin: 0;
+  color: $text;
+  background: $surface-dark-1;
+  overflow-x: hidden;
+  font-family: $font-primary;
+  font-size: $text-base;
+  line-height: $leading-base;
+}
+
+// =============================
+// App Shell
+// =============================
+.appContainer {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 115% 100% at 50% 70%,
+      $surface-dark-3 7%,
+      $surface-dark-1 82%
+    );
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%;
+  }
+}
+
+// =============================
+// Typography
+// =============================
+h1,
+h2,
+h3 {
+  line-height: $heading-line-height;
+  letter-spacing: $heading-letter-spacing;
+  color: $silver-light;
+}
+
+a {
+  color: $silver-light;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-white;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+// =============================
+// Focus Ring
+// =============================
+:where(a, button, [role='button'], input, textarea, select):focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(192, 192, 192, 0.35);
+  border-radius: $border-radius-md;
+}
+
+// =============================
+// Scroll Lock
+// =============================
+.no-scroll {
+  overflow: hidden;
+}

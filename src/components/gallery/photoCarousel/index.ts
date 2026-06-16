@@ -1,0 +1,1 @@
+export { default as PhotoCarousel } from '@/components/gallery/photoCarousel/photoCarousel';

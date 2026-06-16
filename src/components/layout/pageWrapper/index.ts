@@ -1,0 +1,1 @@
+export { default as PageWrapper } from '@/components/layout/pageWrapper/pageWrapper';
