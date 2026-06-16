@@ -1,0 +1,102 @@
+@use '../../../scss/globals/index' as *;
+
+.footer {
+  width: 100%;
+  color: $silver-light;
+  background: $surface-dark-1;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer__inner {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: clamp(1rem, 2.5vw, 2rem) clamp(1rem, 3vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(0.75rem, 2vw, 2rem);
+  flex-wrap: wrap;
+
+  @include maxw($cellphone-portrait) {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.footer__brand {
+  min-width: 220px;
+
+  @include maxw($cellphone-portrait) {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.footer__copy {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.footer__name {
+  color: $color-white;
+}
+
+.footer__tag {
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+  color: $silver-dim;
+  letter-spacing: 0.2px;
+}
+
+.footer__nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1.25rem);
+
+  a {
+    color: $silver-light;
+    text-decoration: none;
+    font-size: 0.95rem;
+    opacity: 0.85;
+    transition: opacity $transition-fast;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  @include maxw($cellphone-portrait) {
+    flex-basis: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+.footer__links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  @include maxw($cellphone-portrait) {
+    flex-basis: 100%;
+    justify-content: center;
+  }
+}
+
+.footer__externalLink {
+  color: $silver-mid;
+  text-decoration: none;
+  font-size: 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+  transition: border-color $transition-fast, color $transition-fast;
+
+  &:hover {
+    color: $color-white;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+}

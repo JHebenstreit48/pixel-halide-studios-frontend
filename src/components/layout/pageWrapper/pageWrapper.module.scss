@@ -1,0 +1,36 @@
+@use '../../../scss/globals/index' as *;
+
+.pageWrapper {
+  width: 100%;
+  min-height: 75vh;
+  padding-bottom: 4rem;
+}
+
+.pageWrapper__header {
+  width: 100%;
+  padding: 2rem 2rem 0;
+  max-width: $container-max;
+  margin: 0 auto;
+
+  @include maxw($cellphone-portrait) {
+    padding: 1.5rem 1rem 0;
+  }
+}
+
+.pageWrapper__title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $silver-light;
+  margin: 0;
+  letter-spacing: 0.3px;
+
+  @include maxw($cellphone-portrait) {
+    font-size: 1.75rem;
+  }
+}
+
+.pageWrapper__content {
+  width: 100%;
+  max-width: $container-max;
+  margin: 0 auto;
+}

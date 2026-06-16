@@ -1,0 +1,13 @@
+@use './core' as *;
+
+// =============================
+// Gallery Color Tokens
+// =============================
+
+$gallery-bg:          $surface-dark-1;
+$gallery-card-bg:     $surface-dark-2;
+$gallery-card-hover:  $surface-dark-3;
+$gallery-overlay-bg:  rgba(0, 0, 0, 0.75);
+$gallery-title-color: $silver-light;
+$gallery-meta-color:  $silver-mid;
+$gallery-tag-color:   $grain-warm;

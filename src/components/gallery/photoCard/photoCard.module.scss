@@ -1,0 +1,79 @@
+@use '../../../scss/globals/index' as *;
+
+.photoCard {
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  background: $surface-dark-2;
+  transition: transform $transition-fast;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $silver-mid;
+    outline-offset: 2px;
+  }
+}
+
+.photoCard__imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.photoCard__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform $transition-base;
+
+  .photoCard:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.photoCard__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.75) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity $transition-fast;
+  display: flex;
+  align-items: flex-end;
+
+  .photoCard:hover & {
+    opacity: 1;
+  }
+}
+
+.photoCard__meta {
+  padding: 0.75rem;
+  width: 100%;
+}
+
+.photoCard__title {
+  color: $color-white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.photoCard__location {
+  color: $silver-mid;
+  font-size: 0.8rem;
+  margin: 0.2rem 0 0;
+}
+
+.photoCard__gear {
+  color: $silver-dim;
+  font-size: 0.75rem;
+  margin: 0.15rem 0 0;
+}
