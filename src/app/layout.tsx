@@ -6,7 +6,7 @@ import '@/app/globals.scss';
 
 export const metadata: Metadata = {
   title: 'Pixel Halide Studios',
-  description: 'Photography portfolio — landscape, portrait, product, and film photography by Justin Hebenstreit.',
+  description: 'Photography portfolio — landscapes, portraits, products, architecture, and film photography by Justin Hebenstreit.',
 };
 
 export default function RootLayout({

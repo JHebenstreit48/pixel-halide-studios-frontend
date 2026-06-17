@@ -4,7 +4,7 @@ export type NavLinkItem = {
 };
 
 const navigationLinks: NavLinkItem[] = [
-  { title: 'Landscape', path: '/landscape' },
+  { title: 'Landscapes', path: '/landscapes' },
   { title: 'Portraits', path: '/portraits' },
   { title: 'Products', path: '/products' },
   { title: 'Architecture', path: '/architecture' },
