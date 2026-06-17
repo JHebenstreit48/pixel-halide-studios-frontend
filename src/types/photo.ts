@@ -1,5 +1,5 @@
 export type PhotoCategory =
-  | 'landscape'
+  | 'landscapes'
   | 'portraits'
   | 'products'
   | 'architecture'

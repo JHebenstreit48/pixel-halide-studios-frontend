@@ -86,7 +86,7 @@ export default function About() {
           <div className={styles.sidebar__card}>
             <h3 className={styles.sidebar__heading}>Specialties</h3>
             <ul className={styles.sidebar__list}>
-              <li>Landscape &amp; Outdoors</li>
+              <li>Landscapes &amp; Outdoors</li>
               <li>Studio Portraiture</li>
               <li>Product Photography</li>
               <li>Architecture</li>

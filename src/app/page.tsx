@@ -3,8 +3,8 @@ import styles from '@/app/home.module.scss';
 
 const CATEGORIES = [
   {
-    title: 'Landscape',
-    slug: 'landscape',
+    title: 'Landscapes',
+    slug: 'landscapes',
     description: 'Wide open spaces and the natural world.',
   },
   {
@@ -41,11 +41,11 @@ export default function Home() {
           <span className={styles.hero__accent}>Tells a Story</span>
         </h1>
         <p className={styles.hero__sub}>
-          Landscape, portrait, product, architecture, and film photography
+          Landscapes, portraits, products, architecture, and film photography
           — captured with intention.
         </p>
         <div className={styles.hero__ctas}>
-          <Link href="/landscape" className={styles.cta__primary}>
+          <Link href="/landscapes" className={styles.cta__primary}>
             Explore the Gallery
           </Link>
           <Link href="/about" className={styles.cta__secondary}>
