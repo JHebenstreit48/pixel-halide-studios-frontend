@@ -1,0 +1,250 @@
+@use '../scss/globals/index' as *;
+
+// =============================
+// Home Page
+// =============================
+
+.home {
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Hero ──────────────────────────────────────────
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: calc(100vh - 56px);
+  padding: $space-3xl $space-xl;
+  gap: $space-lg;
+  animation: fadeInUp 0.6s ease both;
+}
+
+.hero__eyebrow {
+  font-size: $text-xs;
+  font-weight: $font-medium;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: $grain-warm;
+  margin: 0;
+}
+
+.hero__headline {
+  font-size: clamp(2.75rem, 7vw, 5rem);
+  font-weight: $font-bold;
+  line-height: $leading-tight;
+  letter-spacing: $tracking-tight;
+  color: $silver-light;
+  margin: 0;
+}
+
+.hero__accent {
+  color: $grain-highlight;
+  font-style: italic;
+}
+
+.hero__sub {
+  font-size: clamp($text-base, 2vw, $text-md);
+  color: $silver-dim;
+  max-width: 520px;
+  line-height: $leading-relaxed;
+  margin: 0;
+}
+
+.hero__ctas {
+  display: flex;
+  gap: $space-md;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: $space-sm;
+}
+
+.cta__primary {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  background: $silver-light;
+  color: $surface-dark-1;
+  font-weight: $font-semibold;
+  font-size: $text-sm;
+  letter-spacing: $tracking-wide;
+  border-radius: $border-radius-md;
+  text-decoration: none;
+  transition: background $transition-fast, color $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    background: $color-white;
+    color: $surface-dark-1;
+    box-shadow: $shadow-silver-md;
+    text-decoration: none;
+  }
+}
+
+.cta__secondary {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  background: transparent;
+  color: $silver-mid;
+  font-weight: $font-medium;
+  font-size: $text-sm;
+  letter-spacing: $tracking-wide;
+  border-radius: $border-radius-md;
+  border: $border-dim;
+  text-decoration: none;
+  transition: color $transition-fast, border-color $transition-fast;
+
+  &:hover {
+    color: $silver-light;
+    border-color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+  }
+}
+
+// ── Category Grid ──────────────────────────────────
+.categories {
+  padding: $space-4xl $space-xl;
+  max-width: $container-max;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+
+  @include maxw($cellphone-portrait) {
+    padding: $space-3xl $space-md;
+  }
+}
+
+.categories__eyebrow {
+  font-size: $text-xs;
+  font-weight: $font-medium;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: $grain-warm;
+  margin-bottom: $space-sm;
+}
+
+.categories__heading {
+  font-size: clamp($text-2xl, 4vw, $text-4xl);
+  font-weight: $font-bold;
+  color: $silver-light;
+  margin-bottom: $space-2xl;
+}
+
+.categories__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: $space-md;
+
+  @include maxw($cellphone-portrait) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.category__card {
+  display: block;
+  background: $surface-dark-2;
+  border: $border-subtle;
+  border-radius: $border-radius-lg;
+  text-decoration: none;
+  transition: border-color $transition-base, box-shadow $transition-base, transform $transition-base;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: $shadow-card-hover;
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+}
+
+.category__cardInner {
+  padding: $space-xl $space-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+  text-align: left;
+}
+
+.category__title {
+  font-size: $text-lg;
+  font-weight: $font-semibold;
+  color: $silver-light;
+  margin: 0;
+  letter-spacing: $tracking-normal;
+}
+
+.category__desc {
+  font-size: $text-sm;
+  color: $silver-dim;
+  line-height: $leading-relaxed;
+  margin: 0;
+  flex: 1;
+}
+
+.category__arrow {
+  font-size: $text-xs;
+  color: $grain-warm;
+  letter-spacing: $tracking-wide;
+  margin-top: $space-sm;
+  transition: color $transition-fast;
+
+  .category__card:hover & {
+    color: $grain-highlight;
+  }
+}
+
+// ── About Snippet ──────────────────────────────────
+.about {
+  padding: $space-4xl $space-xl;
+  border-top: $border-subtle;
+
+  @include maxw($cellphone-portrait) {
+    padding: $space-3xl $space-md;
+  }
+}
+
+.about__inner {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.about__eyebrow {
+  font-size: $text-xs;
+  font-weight: $font-medium;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: $grain-warm;
+  margin: 0;
+}
+
+.about__heading {
+  font-size: clamp($text-xl, 3vw, $text-3xl);
+  font-weight: $font-bold;
+  color: $silver-light;
+  margin: 0;
+}
+
+.about__body {
+  font-size: $text-base;
+  color: $silver-dim;
+  line-height: $leading-relaxed;
+  margin: 0;
+}
+
+.about__link {
+  display: inline-block;
+  font-size: $text-sm;
+  font-weight: $font-medium;
+  color: $grain-warm;
+  text-decoration: none;
+  letter-spacing: $tracking-wide;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $grain-highlight;
+    text-decoration: none;
+  }
+}

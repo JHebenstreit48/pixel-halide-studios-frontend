@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Lightbox from "@/components/gallery/lightbox/lightbox";
-import styles from "@/components/gallery/photoCarousel/photoCarousel.module.scss";
-import type { Photo, PhotoCategory } from "@/types";
+import { useState } from 'react';
+import Lightbox from '@/components/gallery/lightbox/lightbox';
+import styles from '@/components/gallery/photoCarousel/photoCarousel.module.scss';
+import type { PhotoCategory } from '@/types/photo';
+import usePhotos from '@/hooks/gallery/usePhotos';
 
 type PhotoCarouselProps = {
   category?: PhotoCategory;
@@ -12,39 +13,31 @@ type PhotoCarouselProps = {
   subtitle?: string;
 };
 
-const CATEGORY_META: Record<
-  string,
-  { eyebrow: string; title: string; subtitle: string }
-> = {
-  landscape: {
-    eyebrow: "Portfolio",
-    title: "Landscape Collection",
-    subtitle:
-      "Natural landscapes, wide open spaces, and the beauty of the outdoors.",
+const CATEGORY_META: Record<string, { eyebrow: string; title: string; subtitle: string }> = {
+  landscapes: {
+    eyebrow: 'Portfolio',
+    title: 'Landscape Collection',
+    subtitle: 'Natural landscapes, wide open spaces, and the beauty of the outdoors.',
   },
   portraits: {
-    eyebrow: "Portfolio",
-    title: "Portrait Sessions",
-    subtitle:
-      "Candid and studio portrait photography with signed model releases.",
+    eyebrow: 'Portfolio',
+    title: 'Portrait Sessions',
+    subtitle: 'Candid and studio portrait photography with signed model releases.',
   },
   products: {
-    eyebrow: "Portfolio",
-    title: "Product Photography",
-    subtitle:
-      "Clean, professional product photography for brands and businesses.",
+    eyebrow: 'Portfolio',
+    title: 'Product Photography',
+    subtitle: 'Clean, professional product photography for brands and businesses.',
   },
   architecture: {
-    eyebrow: "Portfolio",
-    title: "Architecture",
-    subtitle:
-      "Buildings, structures, and urban environments captured through the lens.",
+    eyebrow: 'Portfolio',
+    title: 'Architecture',
+    subtitle: 'Buildings, structures, and urban environments captured through the lens.',
   },
   film: {
-    eyebrow: "Portfolio",
-    title: "Film Photography",
-    subtitle:
-      "Shot on 35mm and medium format film — scanned from original negatives.",
+    eyebrow: 'Portfolio',
+    title: 'Film Photography',
+    subtitle: 'Shot on 35mm and medium format film — scanned from original negatives.',
   },
 };
 
@@ -57,18 +50,17 @@ export default function PhotoCarousel({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
-  const photos: Photo[] = [];
+  const { data: photos, loading } = usePhotos(category);
+  const photoList = (photos ?? []).filter(photo => photo.storageUrl); // ← filter empty URLs
 
   const meta = category ? CATEGORY_META[category] : null;
-  const displayEyebrow = eyebrow ?? meta?.eyebrow ?? "Portfolio";
-  const displayTitle = title ?? meta?.title ?? "The Collection";
-  const displaySubtitle = subtitle ?? meta?.subtitle ?? "";
+  const displayEyebrow = eyebrow ?? meta?.eyebrow ?? 'Portfolio';
+  const displayTitle = title ?? meta?.title ?? 'The Collection';
+  const displaySubtitle = subtitle ?? meta?.subtitle ?? '';
 
-  const next = () => setCurrentIndex((i) => (i + 1) % photos.length);
-  const prev = () =>
-    setCurrentIndex((i) => (i - 1 + photos.length) % photos.length);
+  const next = () => setCurrentIndex((i) => (i + 1) % photoList.length);
+  const prev = () => setCurrentIndex((i) => (i - 1 + photoList.length) % photoList.length);
   const goTo = (i: number) => setCurrentIndex(i);
-
   const openLightbox = () => setLightboxOpen(true);
   const closeLightbox = () => setLightboxOpen(false);
 
@@ -80,17 +72,28 @@ export default function PhotoCarousel({
         <p className={styles.gallery__subtitle}>{displaySubtitle}</p>
       </div>
 
-      {photos.length === 0 ? (
+      {loading ? (
         <div className={styles.gallery__placeholder}>
           <div className={styles.carousel__main}>
-            <button
-              className={styles.carousel__btn}
-              disabled
-              aria-label="Previous photo"
-            >
+            <button className={styles.carousel__btn} disabled aria-label="Previous photo">
               &#8592;
             </button>
-
+            <div className={styles.carousel__imagePlaceholder}>
+              <div className={styles.carousel__placeholderInner}>
+                <span className={styles.carousel__placeholderText}>Loading...</span>
+              </div>
+            </div>
+            <button className={styles.carousel__btn} disabled aria-label="Next photo">
+              &#8594;
+            </button>
+          </div>
+        </div>
+      ) : photoList.length === 0 ? (
+        <div className={styles.gallery__placeholder}>
+          <div className={styles.carousel__main}>
+            <button className={styles.carousel__btn} disabled aria-label="Previous photo">
+              &#8592;
+            </button>
             <div className={styles.carousel__imagePlaceholder}>
               <div className={styles.carousel__placeholderInner}>
                 <span className={styles.carousel__placeholderText}>
@@ -98,32 +101,25 @@ export default function PhotoCarousel({
                 </span>
               </div>
             </div>
-
-            <button
-              className={styles.carousel__btn}
-              disabled
-              aria-label="Next photo"
-            >
+            <button className={styles.carousel__btn} disabled aria-label="Next photo">
               &#8594;
             </button>
           </div>
-
           <div className={styles.carousel__dots}>
             {[0, 1, 2, 3, 4].map((i) => (
               <button
                 key={i}
-                className={`${styles.carousel__dot} ${i === 0 ? styles.active : ""}`}
+                className={`${styles.carousel__dot} ${i === 0 ? styles.active : ''}`}
                 disabled
                 aria-label={`Placeholder dot ${i + 1}`}
               />
             ))}
           </div>
-
           <div className={styles.carousel__thumbs}>
             {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div
                 key={i}
-                className={`${styles.carousel__thumb} ${i === 0 ? styles.active : ""}`}
+                className={`${styles.carousel__thumb} ${i === 0 ? styles.active : ''}`}
               >
                 <div className={styles.carousel__thumbPlaceholder} />
               </div>
@@ -131,7 +127,7 @@ export default function PhotoCarousel({
           </div>
         </div>
       ) : (
-        <>
+        <div className={styles.carousel__inner}> {/* ← constrains width to 900px centered */}
           <div className={styles.carousel__main}>
             <button
               className={styles.carousel__btn}
@@ -143,18 +139,18 @@ export default function PhotoCarousel({
 
             <div className={styles.carousel__imageWrap} onClick={openLightbox}>
               <img
-                src={photos[currentIndex].storageUrl}
-                alt={photos[currentIndex].title}
+                src={photoList[currentIndex].storageUrl}
+                alt={photoList[currentIndex].title}
                 className={styles.carousel__image}
               />
               <div className={styles.carousel__overlay}>
-                {photos[currentIndex].location && (
+                {photoList[currentIndex].location && (
                   <p className={styles.carousel__location}>
-                    {photos[currentIndex].location}
+                    {photoList[currentIndex].location}
                   </p>
                 )}
                 <p className={styles.carousel__alt}>
-                  {photos[currentIndex].title}
+                  {photoList[currentIndex].title}
                 </p>
                 <span className={styles.carousel__hint}>Click to enlarge</span>
               </div>
@@ -170,12 +166,10 @@ export default function PhotoCarousel({
           </div>
 
           <div className={styles.carousel__dots}>
-            {photos.map((_, i) => (
+            {photoList.map((_, i) => (
               <button
                 key={i}
-                className={`${styles.carousel__dot} ${
-                  i === currentIndex ? styles.active : ""
-                }`}
+                className={`${styles.carousel__dot} ${i === currentIndex ? styles.active : ''}`}
                 onClick={() => goTo(i)}
                 aria-label={`Go to photo ${i + 1}`}
               />
@@ -183,27 +177,25 @@ export default function PhotoCarousel({
           </div>
 
           <div className={styles.carousel__thumbs}>
-            {photos.map((photo, i) => (
+            {photoList.map((photo, i) => (
               <div
                 key={photo.id}
-                className={`${styles.carousel__thumb} ${
-                  i === currentIndex ? styles.active : ""
-                }`}
+                className={`${styles.carousel__thumb} ${i === currentIndex ? styles.active : ''}`}
                 onClick={() => goTo(i)}
               >
                 <img src={photo.storageUrl} alt={photo.title} />
               </div>
             ))}
           </div>
-        </>
+        </div>
       )}
 
-      {lightboxOpen && photos.length > 0 && (
+      {lightboxOpen && photoList.length > 0 && (
         <Lightbox
-          imageUrl={photos[currentIndex].storageUrl}
-          title={photos[currentIndex].title}
-          location={photos[currentIndex].location}
-          counter={`${currentIndex + 1} / ${photos.length}`}
+          imageUrl={photoList[currentIndex].storageUrl}
+          title={photoList[currentIndex].title}
+          location={photoList[currentIndex].location}
+          counter={`${currentIndex + 1} / ${photoList.length}`}
           onClose={closeLightbox}
           onPrev={prev}
           onNext={next}

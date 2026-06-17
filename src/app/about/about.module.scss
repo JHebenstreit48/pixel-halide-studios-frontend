@@ -1,0 +1,154 @@
+@use '../../scss/globals/index' as *;
+
+// =============================
+// About Page
+// =============================
+
+.about {
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: $space-3xl $space-xl $space-4xl;
+  animation: fadeInUp 0.5s ease both;
+
+  @include maxw($cellphone-portrait) {
+    padding: $space-2xl $space-md $space-3xl;
+  }
+}
+
+// ── Page Header ────────────────────────────────────
+.about__header {
+  margin-bottom: $space-2xl;
+}
+
+.about__eyebrow {
+  font-size: $text-xs;
+  font-weight: $font-medium;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: $grain-warm;
+  margin-bottom: $space-sm;
+}
+
+.about__title {
+  font-size: clamp($text-3xl, 6vw, 4rem);
+  font-weight: $font-bold;
+  color: $silver-light;
+  margin: 0;
+  letter-spacing: $tracking-tight;
+}
+
+// ── Two Column Layout ──────────────────────────────
+.about__layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: $space-3xl;
+  align-items: start;
+
+  @include maxw(960px) {
+    grid-template-columns: 1fr;
+    gap: $space-2xl;
+  }
+}
+
+// ── Bio Column ─────────────────────────────────────
+.about__bio {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.bio__lead {
+  font-size: clamp($text-md, 2vw, $text-lg);
+  color: $silver-light;
+  line-height: $leading-relaxed;
+  font-weight: $font-medium;
+  margin: 0;
+}
+
+.bio__body {
+  font-size: $text-base;
+  color: $silver-dim;
+  line-height: $leading-relaxed;
+  margin: 0;
+}
+
+.bio__externalLink {
+  color: $grain-warm;
+  text-decoration: none;
+  border-bottom: 1px solid rgba($grain-warm, 0.35);
+  transition: color $transition-fast, border-color $transition-fast;
+
+  &:hover {
+    color: $grain-highlight;
+    border-color: $grain-highlight;
+    text-decoration: none;
+  }
+}
+
+// ── Sidebar ────────────────────────────────────────
+.about__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  position: sticky;
+  top: calc($header-height + $space-lg);
+
+  @include maxw(960px) {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $space-md;
+  }
+
+  @include maxw($cellphone-portrait) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar__card {
+  background: $surface-dark-2;
+  border: $border-subtle;
+  border-radius: $border-radius-lg;
+  padding: $space-lg;
+}
+
+.sidebar__heading {
+  font-size: $text-xs;
+  font-weight: $font-semibold;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: $grain-warm;
+  margin: 0 0 $space-md 0;
+}
+
+.sidebar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+
+  li {
+    font-size: $text-sm;
+    color: $silver-dim;
+    line-height: $leading-snug;
+
+    &::before {
+      content: '— ';
+      color: $gray-555;
+    }
+  }
+}
+
+.sidebar__link {
+  color: $grain-warm;
+  text-decoration: none;
+  font-size: $text-sm;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $grain-highlight;
+    text-decoration: none;
+  }
+}
