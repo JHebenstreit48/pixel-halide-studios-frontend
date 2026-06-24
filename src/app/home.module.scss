@@ -16,8 +16,8 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: calc(100vh - 56px);
-  padding: $space-3xl $space-xl;
+  min-height: 40vh;
+  padding: $space-lg $space-xl;
   gap: $space-lg;
   animation: fadeInUp 0.6s ease both;
 }
@@ -103,14 +103,14 @@
 
 // ── Category Grid ──────────────────────────────────
 .categories {
-  padding: $space-4xl $space-xl;
+  padding: $space-2xl $space-xl;
   max-width: $container-max;
   margin: 0 auto;
   width: 100%;
   text-align: center;
 
   @include maxw($cellphone-portrait) {
-    padding: $space-3xl $space-md;
+    padding: $space-xl $space-md;
   }
 }
 
