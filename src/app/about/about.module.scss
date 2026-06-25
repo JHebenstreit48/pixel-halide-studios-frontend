@@ -7,7 +7,7 @@
 .about {
   max-width: $container-max;
   margin: 0 auto;
-  padding: $space-3xl $space-xl $space-4xl;
+  padding: 1rem 0;
   animation: fadeInUp 0.5s ease both;
 
   @include maxw($cellphone-portrait) {
@@ -15,11 +15,28 @@
   }
 }
 
-// ── Page Header ────────────────────────────────────
-.about__header {
-  margin-bottom: $space-2xl;
+// ── Body Wrapper ───────────────────────────────────
+.about__body {
+  display: flex;
+  flex-direction: row;
+  gap: $space-3xl;
+  align-items: flex-start;
+
+  @include maxw(960px) {
+    flex-direction: column;
+    gap: $space-2xl;
+  }
 }
 
+// ── Bio Column ─────────────────────────────────────
+.about__bio {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+// ── Page Header ────────────────────────────────────
 .about__eyebrow {
   font-size: $text-xs;
   font-weight: $font-medium;
@@ -35,26 +52,6 @@
   color: $silver-light;
   margin: 0;
   letter-spacing: $tracking-tight;
-}
-
-// ── Two Column Layout ──────────────────────────────
-.about__layout {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: $space-3xl;
-  align-items: start;
-
-  @include maxw(960px) {
-    grid-template-columns: 1fr;
-    gap: $space-2xl;
-  }
-}
-
-// ── Bio Column ─────────────────────────────────────
-.about__bio {
-  display: flex;
-  flex-direction: column;
-  gap: $space-lg;
 }
 
 .bio__lead {
@@ -85,16 +82,55 @@
   }
 }
 
+// ── Portfolio Links ────────────────────────────────
+.about__divider {
+  width: 60px;
+  height: 1px;
+  background: $grain-warm;
+  opacity: 0.4;
+  margin: 0;
+}
+
+.about__links {
+  display: flex;
+  flex-direction: row;
+  gap: $space-xl;
+  flex-wrap: wrap;
+
+  @include maxw($cellphone-portrait) {
+    flex-direction: column;
+    gap: $space-md;
+  }
+}
+
+.about__portfolioLink {
+  display: inline-block;
+  color: $grain-warm;
+  font-size: $text-sm;
+  font-weight: $font-medium;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border-bottom: 1px solid rgba($grain-warm, 0.35);
+  padding-bottom: 2px;
+  transition: color $transition-fast, border-color $transition-fast;
+
+  &:hover {
+    color: $grain-highlight;
+    border-color: $grain-highlight;
+  }
+}
+
 // ── Sidebar ────────────────────────────────────────
 .about__sidebar {
+  width: 320px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: $space-md;
-  position: sticky;
-  top: calc($header-height + $space-lg);
+  margin: 4rem auto 0 auto;
 
   @include maxw(960px) {
-    position: static;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: $space-md;
