@@ -1,0 +1,1 @@
+export { default as PhotoMeta } from '@/components/gallery/photoMeta/photoMeta';
