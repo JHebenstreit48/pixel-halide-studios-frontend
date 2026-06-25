@@ -1,9 +1,9 @@
 export type PhotoCategory =
-  | 'landscapes'
-  | 'portraits'
-  | 'products'
-  | 'architecture'
-  | 'film';
+  | "landscapes"
+  | "portraits"
+  | "products"
+  | "architecture"
+  | "film";
 
 export type Photo = {
   id: string;
@@ -13,7 +13,9 @@ export type Photo = {
   description?: string;
   dateTaken?: string;
   location?: string;
-  gear?: string;
+  camera?: string;
+  iso?: number;
+  aperture?: string;
   tags?: string[];
   featured?: boolean;
   order?: number;

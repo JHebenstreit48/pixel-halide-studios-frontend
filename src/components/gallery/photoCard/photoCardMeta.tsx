@@ -1,5 +1,5 @@
-import styles from '@/components/gallery/photoCard/photoCard.module.scss';
-import type { Photo } from '@/types';
+import styles from "@/components/gallery/photoCard/photoCard.module.scss";
+import type { Photo } from "@/types";
 
 type PhotoCardMetaProps = {
   photo: Photo;
@@ -12,8 +12,12 @@ export default function PhotoCardMeta({ photo }: PhotoCardMetaProps) {
       {photo.location && (
         <p className={styles.photoCard__location}>{photo.location}</p>
       )}
-      {photo.gear && (
-        <p className={styles.photoCard__gear}>{photo.gear}</p>
+      {photo.camera && (
+        <p className={styles.photoCard__gear}>
+          {photo.camera}
+          {photo.iso ? ` · ISO ${photo.iso}` : ""}
+          {photo.aperture ? ` · ${photo.aperture}` : ""}
+        </p>
       )}
     </div>
   );
