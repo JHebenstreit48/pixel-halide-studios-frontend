@@ -1,13 +1,13 @@
 export default function formatDate(dateString: string): string {
   if (!dateString) return '';
 
-  const date = new Date(dateString);
+  const [year, month, day] = dateString.split('-').map(Number);
+  
+  if (!year || !month || !day) return '';
 
-  if (isNaN(date.getTime())) return '';
-
-  return new Intl.DateTimeFormat('en-US', {
+  return new Date(year, month - 1, day).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
-  }).format(date);
+  });
 }
