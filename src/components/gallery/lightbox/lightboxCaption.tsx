@@ -1,28 +1,18 @@
 import styles from '@/components/gallery/lightbox/lightbox.module.scss';
-
-type LightboxCaptionProps = {
-  title?: string;
-  location?: string;
-  camera?: string;
-  iso?: number;
-  aperture?: string;
-  dateTaken?: string;
-  tags?: string[];
-  counter?: string;
-};
-
-const formatDate = (date: string) =>
-  new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric', month: 'long', day: 'numeric',
-  });
+import type { LightboxCaptionProps } from '@/types';
+import formatDate from '@/utils/formatDate';
 
 export default function LightboxCaption({
   title,
+  description,
   location,
   camera,
   iso,
   aperture,
+  gear,
+  filmStock,
   dateTaken,
+  dateScanned,
   tags,
   counter,
 }: LightboxCaptionProps) {
@@ -34,13 +24,27 @@ export default function LightboxCaption({
       {title && (
         <p className={styles.lightbox__title}>{title}</p>
       )}
+      {description && (
+        <p className={styles.lightbox__description}>{description}</p>
+      )}
+      {gear && (
+        <p className={styles.lightbox__gear}>{gear}</p>
+      )}
       {(camera || iso || aperture) && (
         <p className={styles.lightbox__gear}>
-          {[camera, iso ? `ISO ${iso}` : null, aperture].filter(Boolean).join(' · ')}
+          {[camera, iso ? `ISO ${iso}` : null, aperture]
+            .filter(Boolean)
+            .join(' · ')}
         </p>
+      )}
+      {filmStock && (
+        <p className={styles.lightbox__filmStock}>{filmStock}</p>
       )}
       {dateTaken && (
         <p className={styles.lightbox__date}>{formatDate(dateTaken)}</p>
+      )}
+      {dateScanned && (
+        <p className={styles.lightbox__date}>Scanned: {formatDate(dateScanned)}</p>
       )}
       {tags && tags.length > 0 && (
         <div className={styles.lightbox__tags}>
